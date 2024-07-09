@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import localFont from "next/font/local";
 import Image from "next/image";
+import { Spinner } from "../spinner/Spinner";
 
 interface Props {
   variant?: "link" | "demi-link" | "button";
@@ -72,17 +73,39 @@ export const Button = ({
       disabled={disable}
       onClick={onClick}
     >
-      {disable ? (
+      {disable && (
         <div className="flex flex-row gap-2 items-center align-middle justify-center">
           <div className="underline-from-left-disable text-black cursor-not-allowed">
             Bouton désactivé
           </div>
         </div>
-      ) : (
+      )}
+      {!disable && !isLoading && (
         <div>
           {icon === "true" ? (
             <div className="flex flex-row gap-2 items-center align-middle justify-center">
               <Image src="/svg/Arrow.svg" width={22} height={22} alt="" />
+              {variant === "demi-link" ? (
+                <div className="underline-from-left-projet text-black">
+                  {children}
+                </div>
+              ) : (
+                <div className="underline-from-left text-black">{children}</div>
+              )}
+            </div>
+          ) : (
+            <div className="flex flex-row gap-2 items-center align-middle justify-center">
+              <div className="underline-from-left text-black">{children}</div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {isLoading && (
+        <div>
+          {icon === "true" ? (
+            <div className="flex flex-row gap-2 items-center align-middle justify-center">
+              <Spinner />
               {variant === "demi-link" ? (
                 <div className="underline-from-left-projet text-black">
                   {children}

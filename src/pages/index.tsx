@@ -39,6 +39,7 @@ export default function Home() {
       <Article>Pourquoi nous ?</Article>
       <Separator variant="simple" border="fine" />
       <Tarif>Nos tarifs</Tarif>
+      <Separator variant="double" />
     </Container>
   );
 }
